@@ -182,7 +182,7 @@ Solver *PlannerBase::InitializeSolver(DSPOMDP *model, Belief* belief,
 		string lbtype = options[E_LBTYPE] ? options[E_LBTYPE].arg : "DEFAULT";
 		ScenarioLowerBound *lower_bound = model->CreateScenarioLowerBound(
 				lbtype, blbtype);
-
+		
 		logi << "Created lower bound " << typeid(*lower_bound).name() << endl;
 
 		if (solver_type == "DESPOT") {
@@ -255,7 +255,7 @@ void PlannerBase::OptionParse(option::Option *options, int &num_runs,
 	if (options[E_DEPTH])
 		Globals::config.search_depth = atoi(options[E_DEPTH].arg);
 
-	if (options[E_DISCOUNT])
+	if (options[E_DISCOUNT]) 
 		Globals::config.discount = atof(options[E_DISCOUNT].arg);
 
 	if (options[E_SEED])

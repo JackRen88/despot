@@ -8,8 +8,8 @@ namespace despot {
 struct Config {
 	double time_per_move;  // CPU time available to construct the search tree
 	int sim_len; // The number of simulation steps for each episode.
-	int num_scenarios; // The number of scenarios usedto generate the DESPOT tree
-	int search_depth; // The maximum depth of the search tree
+  int num_scenarios; // The number of scenarios used to generate the DESPOT tree
+  int search_depth; // The maximum depth of the search tree
 	int max_policy_sim_len; // Maximum number of steps for simulating the default policy (rollout). Note that the depth of rollouts won't exceed the maximum search depth.
 	double discount; // The discount factor
 	double pruning_constant; // The pruning constant attached to each node for regularization purpose

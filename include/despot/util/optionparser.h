@@ -555,27 +555,28 @@ public:
 		return c;
 	}
 
-	/**
-	 * @brief Returns true iff this is the first element of the linked list.
-	 *
-	 * The first element in the linked list is the first option on the command line
-	 * that has the respective Descriptor::index value.
-	 *
-	 * Returns true for an unused/invalid option.
-	 */
-	bool isFirst() const {
-		return isTagged(prev_);
-	}
+  /**
+   * @brief Returns true if this is the first element of the linked list.
+   *
+   * The first element in the linked list is the first option on the command line
+   * that has the respective Descriptor::index value.
+   *
+   * Returns true for an unused/invalid option.
+   */
+  bool isFirst() const
+  {
+    return isTagged(prev_);
+  }
 
-	/**
-	 * @brief Returns true iff this is the last element of the linked list.
-	 *
-	 * The last element in the linked list is the last option on the command line
-	 * that has the respective Descriptor::index value.
-	 *
-	 * Returns true for an unused/invalid option.
-	 */
-	bool isLast() const {
+  /**
+   * @brief Returns true if this is the last element of the linked list.
+   *
+   * The last element in the linked list is the last option on the command line
+   * that has the respective Descriptor::index value.
+   *
+   * Returns true for an unused/invalid option.
+   */
+  bool isLast() const {
 		return isTagged(next_);
 	}
 
