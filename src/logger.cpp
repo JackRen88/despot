@@ -183,6 +183,7 @@ double Logger::StderrDiscountedRoundReward() const {
     sum2 += reward * reward;
   }
   int n = discounted_round_rewards_.size();
+  // TODO:One more divisor n
   return n > 0 ? sqrt(sum2 / n / n - sum * sum / n / n / n) : 0.0;
 }
 
@@ -211,7 +212,7 @@ void Logger::InitRound(State* state) {
     // Print initial state
     if (!Globals::config.silence && out_) {
       if (state_) {
-        *out_ << "Initial state: " << endl;
+        *out_ << " Agent initial state: " << endl;
         world_->PrintState(*state_, *out_);
         *out_ << endl;
       }
@@ -268,6 +269,7 @@ bool Logger::SummarizeStep(int step, int round, bool terminal, ACT_TYPE action,
   if (world_type_ == "pomdp")
     reward_ = static_cast<POMDPWorld*>(world_)->step_reward_;
   else if (state_ != NULL) {
+    // TODO: state_ that is after the action is executed
     reward_ = model_->Reward(*state_, action);
     if (reward_ >
         model_->GetMaxReward()) {  // invalid reward from model_->Reward
@@ -303,6 +305,10 @@ bool Logger::SummarizeStep(int step, int round, bool terminal, ACT_TYPE action,
           << "- Current rewards:" << endl
           << "  discounted / undiscounted = " << total_discounted_reward_
           << " / " << total_undiscounted_reward_ << endl;
+
+  // TODO:add to print current belief info.
+  if (!Globals::config.silence && out_ && belief_)
+    *out_ << "- updated belief: " << belief_->text() << endl;
 
   if (target_finish_time_ != -1) {
     if (step_time < 0.99 * EvalLog::allocated_time) {

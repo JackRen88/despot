@@ -33,7 +33,7 @@ VNode* DESPOT::Trial(VNode* root, RandomStreams& streams,
     }
 
     ExploitBlockers(cur);
-    // cur is blocked,gap == 0, so don't expand any more, make prune
+    // cur is blocked ,gap == 0, so don't expand any more, make prune
     if (Gap(cur) == 0) {
       break;
     }
@@ -159,7 +159,7 @@ VNode* DESPOT::ConstructTree(vector<State*>& particles, RandomStreams& streams,
   if (statistics != NULL) {
     statistics->num_particles_after_search = model->NumActiveParticles();
     statistics->num_policy_nodes = root->PolicyTreeSize();
-    statistics->num_tree_nodes = root->Size();
+    statistics->num_tree_nodes = root->Size();  // Vnode num for despot tree
     statistics->final_lb = root->lower_bound();
     statistics->final_ub = root->upper_bound();
     statistics->time_search = used_time;
@@ -779,7 +779,7 @@ void DESPOT::BeliefUpdate(ACT_TYPE action, OBS_TYPE obs) {
 
   // lower_bound_->belief(belief_);
 
-  logi << "[Solver::Update] Updated belief, history and root with action "
+  logi << "[DESPOT::BeliefUpdate] Updated belief, history and root with action "
        << action << ", observation " << obs << " in "
        << (get_time_second() - start) << "s" << endl;
 }

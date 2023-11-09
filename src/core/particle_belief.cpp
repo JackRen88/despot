@@ -4,7 +4,6 @@
  *  Created on: 21 Sep 2017
  *      Author: panpan
  */
-
 #include <despot/core/particle_belief.h>
 #include <despot/interface/pomdp.h>
 
@@ -306,8 +305,8 @@ vector<State*> ParticleBelief::Resample(int num, const vector<State*>& belief,
     sample[i]->weight = sample[i]->weight / total_weight;
   }
 
-  logd << "[Belief::Resample] Resampled " << sample.size() << " particles"
-       << endl;
+  logd << "[ParticleBelief::Resample] Resampled " << sample.size()
+       << " particles" << endl;
   for (int i = 0; i < sample.size(); i++) {
     logv << " " << i << " = " << *sample[i] << endl;
   }
@@ -319,7 +318,7 @@ vector<State*> ParticleBelief::Resample(int num, const DSPOMDP* model,
                                         const StateIndexer* indexer,
                                         ACT_TYPE action, OBS_TYPE obs) {
   if (indexer == NULL) {
-    loge << "[Belief::Resample] indexer cannot be null" << endl;
+    loge << "[ParticleBelief::Resample] indexer cannot be null" << endl;
     exit(1);
   }
 
@@ -360,7 +359,7 @@ vector<State*> ParticleBelief::Resample(int num, const Belief& belief,
     trial++;
 
     // Step through history
-    double log_wgt = 0;
+    double log_wgt = 0;  //=log(particle->weight)
     for (int i = hstart; i < history.Size(); i++) {
       belief.model_->Step(*particle, Random::RANDOM.NextDouble(),
                           history.Action(i), reward, obs);
@@ -411,8 +410,8 @@ vector<State*> ParticleBelief::Resample(int num, const Belief& belief,
     sample[i]->weight = sample[i]->weight / total_weight;
   }
 
-  logd << "[Belief::Resample] Resampled " << sample.size() << " particles"
-       << endl;
+  logd << "[ParticleBelief::Resample] Resampled " << sample.size()
+       << " particles" << endl;
   for (int i = 0; i < sample.size(); i++) {
     logv << " " << i << " = " << *sample[i] << endl;
   }
